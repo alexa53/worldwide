@@ -46,7 +46,8 @@ jobs:
         shell: bash
         run: |
           node <<'NODE'
-          const admin = require('firebase-admin');
+          const { cert, initializeApp } = require('firebase-admin/app');
+          const { getMessaging } = require('firebase-admin/messaging');
 
           let serviceAccount;
           try {
@@ -55,13 +56,13 @@ jobs:
             throw new Error('FIREBASE_SERVICE_ACCOUNT no contiene un JSON válido.');
           }
 
-          admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
+          initializeApp({
+            credential: cert(serviceAccount),
             projectId: 'teamhzpro',
           });
 
           async function notify() {
-            const messageId = await admin.messaging().send({
+            const messageId = await getMessaging().send({
               topic: 'com.crissenhz.servers',
               data: {
                 tipo: 'config_update',
