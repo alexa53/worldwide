@@ -66,6 +66,7 @@ jobs:
               topic: 'com.crissenhz.servers',
               data: {
                 tipo: 'config_update',
+                id_notification: '4102',
               },
               android: {
                 priority: 'high',
