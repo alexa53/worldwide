@@ -63,7 +63,7 @@ jobs:
 
           async function notify() {
             const messageId = await getMessaging().send({
-              topic: 'com.crissenhz.servers',
+              condition: "'com.crissenhz.servers' in topics || 'rx.teamhz.plus' in topics",
               data: {
                 tipo: 'config_update',
                 id_notification: '4102',
